@@ -6,6 +6,7 @@
     box-sizing: border-box;
 }
 body{
+    padding-top: 80px; /* Ajusta la altura del padding al tamaño de tu header */
     position:relative; /* los elementos se posicionan en relación a su padre */
     width: 100%;
     height: 100vh;
@@ -455,6 +456,7 @@ header section:hover .bi-chevron-left{
 }
 
 main{
+    
     position: absolute;
     top:110%;
     width: 80%;
@@ -538,8 +540,98 @@ main{
     color:#fff;
 }
 
-@media (min-width:768px) and (max-width: 1185px) {
-    body{ background: red; }
-    main{top: 115%;
+@media (max-width: 768px) {
+    header {
+      min-width: 90%;
+      min-height: 90%;
+    }
+    main{
+        top: 170%
+    }
+  
+    header nav {
+      min-height: 15%;
+      padding: 0px 20px;
+    }
+  
+    header nav .logo_ul img {
+      margin-left: 0px;
+    }
+  
+    header nav .logo_ul ul li {
+      padding: 3px 10px;
+    }
+  
+    header nav .search_user input {
+      padding: 3px 5px;
+      margin-right: 5px;
+    }
+  
+    header nav .search_user img {
+      width: 20px;
+      height: 20px;
+    }
+  
+    header nav .search_user .search {
+      width: 280px;
+      height: 170px;
+      top: 30px;
+    }
+  
+    header nav .search_user .search .card .img {
+      width: 25px;
+    }
+  
+    header nav .search_user .search .card .cont h3 {
+      font-size: 13px;
+      width: 200px;
     }
   }
+
+  
+  @media only screen and (max-width: 1400px) {  
+    main {
+        top:110%;
+      height: auto;
+    }
+}
+
+@media only screen and (max-width: 590px) {
+    header {
+      height: 80px;
+      font-size: 16px;
+    }
+  
+    main {
+        top:110%;
+      height: auto;
+    }
+
+    
+    .box .box-img{
+        width: 100%;
+        height: 240px;
+        margin-bottom: 78px;
+    }
+}
+
+@media only screen and (max-width: 535px) {
+    header {
+      height: 80px;
+      font-size: 16px;
+    }
+      
+    main {
+        top:110%;
+      height: auto;
+    }
+
+    
+    .box .box-img{
+        width: 100%;
+        height: 170px;
+        margin-bottom: 78px;
+    }
+}
+
+  
