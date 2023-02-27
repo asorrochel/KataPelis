@@ -1,5 +1,7 @@
+<script setup>
+import { RouterLink, RouterView } from 'vue-router'
+</script>
+
 <template>
-  <main>
-    <h1>KataPelis 🎬🍿</h1>
-  </main>
+  <RouterView />
 </template>
