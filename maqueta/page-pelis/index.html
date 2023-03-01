@@ -269,3 +269,17 @@
     </main>
 </body>
 </html>
+
+<h1>Películas</h1>
+<ul class="list-unstyled">
+  <li
+    class="card align-items-center"
+    v-for="peli in peliculas"
+    :key="peli.imdbID"
+  >
+    <router-link :to="`/${peli.imdbID}`" class="mt-3">
+      <img :src="peli.Poster" :alt="peli.Title" />
+      <p>{{ peli.Title }}</p>
+    </router-link>
+  </li>
+</ul>
