@@ -3,11 +3,7 @@
     <div class="header">Reparto</div>
     <div class="list">
       <div class="cast" v-for="(actor, index) in actorsWithImages" :key="index">
-        <img
-          :src="`https://image.tmdb.org/t/p/original${actor.image}`"
-          :alt="actor.name"
-        />
-        <label>{{ actor.name }}</label>
+        <RouteLinkActor :actor="actor" />
       </div>
     </div>
   </div>
@@ -16,7 +12,8 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-import { defineProps } from 'vue'
+
+import RouteLinkActor from '@/components/RouterLinkActor.vue'
 
 const props = defineProps({
   actors: {
@@ -41,7 +38,6 @@ const getActorData = async actors => {
 const fetchActorImages = async () => {
   const actorR = await getActorData(props.actors)
   for (const actor of actorR) {
-    console.log(actor.profile_path)
     if (actor.profile_path !== null) {
       actorsWithImages.value.push({
         name: actor.name,
@@ -76,28 +72,5 @@ fetchActorImages()
   cursor: pointer;
 }
 
-.movie-cast img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-  border: 2px solid #cccccc;
-}
 
-.movie-cast .cast:hover img {
-  border-width: 0px;
-  transform: scale(1.1) rotateZ(-2deg);
-  box-shadow: -4px 4px 16px #00ffff, 4px -4px 16px #00ff00; /* sombra */
-}
-
-.movie-cast label {
-  margin-top: 8px;
-  display: block;
-}
-
-.movie-cast .cast:hover label {
-  margin-top: 24px;
-  color: #00ff00;
-  font-weight: medium;
-}
 </style>

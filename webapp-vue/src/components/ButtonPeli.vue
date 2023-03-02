@@ -4,7 +4,7 @@
       Trailer
       <i class="bi bi-play-fill"></i>
     </a>
-    <a id="imdb" :href="`https://www.imdb.com/title/${peliId}`" target="_blank">
+    <a id="imdb" :href="`https://www.imdb.com/title/${peli.imdbID}`" target="_blank">
       IMDB
     </a>
   </div>
@@ -12,7 +12,7 @@
 
 <script setup>
 defineProps({
-  peliId: {
+  peli: {
     type: Object,
     required: true,
   },

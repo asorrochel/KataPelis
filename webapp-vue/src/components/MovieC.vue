@@ -1,7 +1,7 @@
 <template>
   <!--Poster-->
   <div class="poster">
-    <img :src="peli.Poster" alt="" />
+    <img :src="peli.Poster" :alt="peli.name" />
   </div>
   <!--Info Película-->
   <div class="info">
@@ -10,9 +10,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
 import MovieInfo from '@/components/MovieInfo.vue'
-
 defineProps({
   peli: {
     type: Object,

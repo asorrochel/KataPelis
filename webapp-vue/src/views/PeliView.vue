@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <!--Película-->
-    <Movie :peli="peli" :actors="actors" />
+    <MovieC :peli="peli" :actors="actors" />
   </div>
   <h1 v-if="peli === null && actors === null">No existe la película</h1>
 </template>
@@ -11,7 +11,7 @@ import axios from 'axios'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 
-import Movie from '@/components/MovieC.vue'
+import MovieC from '@/components/MovieC.vue'
 
 //Variables
 const route = useRoute()
@@ -29,8 +29,8 @@ const getData = async () => {
     //separar los actores por comas y meterlos en un array
     actors.value = peli.value.Actors.split(', ')
   } catch (error) {
-    console.log(error)
     peli.value = null
+    return error
   }
 }
 //cambiar el fondo de la página por la imagen de la película

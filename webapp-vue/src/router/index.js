@@ -1,4 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import NotFoundView from '@/views/NotFoundView.vue'
+import PelisView from '@/views/PelisView.vue'
+import PeliView from '@/views/PeliView.vue'
+import ActorView from '@/views/ActorView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -6,17 +10,22 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/PelisView.vue'),
+      component: PelisView,
     },
     {
       path: '/:imdbID',
       name: 'peli',
-      component: () => import('@/views/PeliView.vue'),
+      component: PeliView,
+    },
+    {
+      path: '/:name',
+      name: 'actor',
+      component: ActorView,
     },
     {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
-      component: () => import('@/views/NotFoundView.vue'),
+      component: NotFoundView,
     },
   ],
 })

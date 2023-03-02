@@ -31,7 +31,7 @@ const getDataSearch = async () => {
     )
     peliculas.value = data.Search
   } catch (error) {
-    console.log(error)
+    return error
   }
 }
 
