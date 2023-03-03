@@ -1,13 +1,18 @@
 <template>
-  <!-- Header -->
-  <header>
-    <TheHeaderMovies :peliculas="peliculas" />
-  </header>
-  <!-- Main-->
-  <main id="movies">
-    <!-- Películas-->
-    <BaseContainerMovies :peliculas="peliculas" />
-  </main>
+  <div v-if="loading">
+    <h1>Cargando...</h1>
+  </div>
+  <div v-else>
+    <!-- Header -->
+    <header>
+      <TheHeaderMovies :peliculas="peliculas" />
+    </header>
+    <!-- Main-->
+    <main id="movies">
+      <!-- Películas-->
+      <BaseContainerMovies :peliculas="peliculas" />
+    </main>
+  </div>
 </template>
 
 <script setup>
@@ -18,6 +23,7 @@ import BaseContainerMovies from '@/components/BaseContainerMovies.vue'
 import TheHeaderMovies from '@/components/TheHeaderMovies.vue'
 
 const peliculas = ref([])
+const loading = ref(true)
 
 //cambiar el fondo del body
 const changeBodyBackground = () => {
@@ -35,6 +41,7 @@ const getData = async () => {
       `https://www.omdbapi.com/?s=${randomMovies.value[randomNumber]}&apikey=ab64c929`,
     )
     peliculas.value = data.Search
+    loading.value = false
   } catch (error) {
     return error
   }
@@ -52,8 +59,10 @@ changeBodyBackground()
   margin: 0%;
   box-sizing: border-box;
 }
+
 body {
-  position: relative; /* los elementos se posicionan en relación a su padre */
+  position: relative;
+  /* los elementos se posicionan en relación a su padre */
   width: 100%;
   height: 100vh;
   background: rgb(23, 23, 23);
@@ -67,7 +76,7 @@ body {
 header {
   position: absolute;
   top: 50px;
-  left: 150px;
+  left: 155px;
   min-width: 80%;
   min-height: 80%;
   /* border: 1px solid #fff;  */
@@ -89,5 +98,100 @@ main {
   justify-content: center;
   flex-direction: wrap;
   padding: 20px 0px;
+}
+
+@media (max-width: 768px) {
+  header {
+    min-width: 90%;
+    min-height: 90%;
+  }
+
+  main {
+    top: 170%
+  }
+
+  header nav {
+    min-height: 15%;
+    padding: 0px 20px;
+  }
+
+  header nav .logo_ul img {
+    margin-left: 0px;
+  }
+
+  header nav .logo_ul ul li {
+    padding: 3px 10px;
+  }
+
+  header nav .search_user input {
+    padding: 3px 5px;
+    margin-right: 5px;
+  }
+
+  header nav .search_user img {
+    width: 20px;
+    height: 20px;
+  }
+
+  header nav .search_user .search {
+    width: 280px;
+    height: 170px;
+    top: 30px;
+  }
+
+  header nav .search_user .search .card .img {
+    width: 25px;
+  }
+
+  header nav .search_user .search .card .cont h3 {
+    font-size: 13px;
+    width: 200px;
+  }
+}
+
+
+@media only screen and (max-width: 1400px) {
+  main {
+    top: 110%;
+    height: auto;
+  }
+}
+
+@media only screen and (max-width: 590px) {
+  header {
+    height: 80px;
+    font-size: 16px;
+  }
+
+  main {
+    top: 110%;
+    height: auto;
+  }
+
+
+  .box .box-img {
+    width: 100%;
+    height: 240px;
+    margin-bottom: 78px;
+  }
+}
+
+@media only screen and (max-width: 535px) {
+  header {
+    height: 80px;
+    font-size: 16px;
+  }
+
+  main {
+    top: 110%;
+    height: auto;
+  }
+
+
+  .box .box-img {
+    width: 100%;
+    height: 170px;
+    margin-bottom: 78px;
+  }
 }
 </style>

@@ -52,14 +52,19 @@ defineProps({
 .movie-title {
   font-size: 64px;
   font-weight: bold;
-  background-image: linear-gradient(45deg, #00ffff, #00ff00);
-  background-clip: text; /* Solo se aplica al texto */
-  -webkit-background-clip: text;
-  color: transparent; /* texto transparente para poder mostrar el degradado*/
+  color: white;
+  background-color: transparent;
+  background: rgba(0, 0, 0, 0.243);
+  border-radius: 8px;
+  width: 70%;
+  margin-bottom: 20px;
+
+  /* texto transparente para poder mostrar el degradado*/
 }
 
 .movie-detail .set {
-  display: inline-block; /* para que se muestren en linea */
+  display: inline-block;
+  /* para que se muestren en linea */
   margin-right: 64px;
 }
 

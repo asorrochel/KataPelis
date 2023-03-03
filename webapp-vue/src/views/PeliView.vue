@@ -1,14 +1,19 @@
 <template>
-  <div class="container">
-    <!--Película-->
-    <MovieC :peli="peli" :actors="actors" />
+  <div v-if="loading">
+    <h1>Cargando...</h1>
   </div>
-  <h1 v-if="peli === null && actors === null">No existe la película</h1>
+  <div v-else>
+    <div class="container">
+      <!--Película-->
+      <MovieC :peli="peli" :actors="actors" />
+    </div>
+    <h1 v-if="peli === null && actors === null">No existe la película</h1>
+  </div>
 </template>
 
 <script setup>
 import axios from 'axios'
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 import MovieC from '@/components/MovieC.vue'
@@ -17,6 +22,8 @@ import MovieC from '@/components/MovieC.vue'
 const route = useRoute()
 const peli = ref(null)
 const actors = ref(null)
+
+const loading = ref(true)
 
 //obtener datos de la película
 const getData = async () => {
@@ -28,13 +35,15 @@ const getData = async () => {
     peli.value = data
     //separar los actores por comas y meterlos en un array
     actors.value = peli.value.Actors.split(', ')
+    loading.value = false
+    changeBackground()
   } catch (error) {
     peli.value = null
     return error
   }
 }
 //cambiar el fondo de la página por la imagen de la película
-onMounted(() => {
+const changeBackground = () => {
   const posterUrl = peli.value.Poster
   const body = document.querySelector('body')
   body.classList.add('movie-page')
@@ -42,8 +51,7 @@ onMounted(() => {
   body.style.backgroundRepeat = 'no-repeat'
   body.style.backgroundSize = 'cover'
   body.style.backgroundPosition = 'center center'
-})
-
+}
 getData()
 </script>
 
@@ -57,6 +65,7 @@ getData()
   font-family: 'Poppins', sans-serif;
   transition: all 0.35s linear;
 }
+
 movie-page {
   min-height: 100vh;
 }
@@ -65,9 +74,12 @@ movie-page {
   max-width: 110%;
   min-height: 100vh;
   display: grid;
-  grid-template-columns: 480px 1fr; /* 1 columna 480px, 2 columna el resto*/
-  grid-gap: 32px; /* separacion entre columnas */
-  backdrop-filter: blur(12px) contrast(80%); /* efecto de desenfoque */
+  grid-template-columns: 480px 1fr;
+  /* 1 columna 480px, 2 columna el resto*/
+  grid-gap: 32px;
+  /* separacion entre columnas */
+  backdrop-filter: blur(12px) contrast(80%);
+  /* efecto de desenfoque */
   color: white;
 }
 
@@ -77,36 +89,47 @@ movie-page {
     grid-template-columns: 100%;
     backdrop-filter: blur(12px) contrast(80%);
   }
+
   .movie-title {
-    font-size: 32px; /* reduce the font size */
+    font-size: 32px;
+    /* reduce the font size */
   }
 
   .movie-detail .set {
     display: inline-block;
-    margin-right: 30px; /* reduce the margin */
+    margin-right: 30px;
+    /* reduce the margin */
   }
 
   .movie-detail label {
-    font-size: 12px; /* reduce the font size */
+    font-size: 12px;
+    /* reduce the font size */
   }
 
   .movie-detail span {
-    font-size: 18px; /* reduce the font size */
+    font-size: 18px;
+    /* reduce the font size */
   }
 
   .movie-cast .header {
-    font-size: 18px; /* reduce the font size */
-    margin-bottom: 16px; /* reduce the margin */
+    font-size: 18px;
+    /* reduce the font size */
+    margin-bottom: 16px;
+    /* reduce the margin */
   }
 
   .movie-cast .list {
-    grid-template-columns: repeat(3, 1fr); /* use 3 columns */
-    grid-gap: 10px; /* reduce the gap */
+    grid-template-columns: repeat(3, 1fr);
+    /* use 3 columns */
+    grid-gap: 10px;
+    /* reduce the gap */
   }
 
   .movie-cast .cast {
-    width: 100px; /* reduce the width */
-    height: 140px; /* reduce the height */
+    width: 100px;
+    /* reduce the width */
+    height: 140px;
+    /* reduce the height */
   }
 
   .movie-cast label {
@@ -116,6 +139,7 @@ movie-page {
   .movie-description {
     font-size: 12px;
   }
+
   .poster {
     display: none;
   }
@@ -125,6 +149,7 @@ movie-page {
     left: 170px;
     top: -20px;
   }
+
   #trailer {
     position: relative;
     left: 170px;

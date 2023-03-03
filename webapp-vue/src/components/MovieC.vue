@@ -1,7 +1,7 @@
 <template>
   <!--Poster-->
   <div class="poster">
-    <img :src="peli.Poster" :alt="peli.name" />
+    <img :src="`${peli?.Poster}`" :alt="`${peli?.name}`" />
   </div>
   <!--Info Película-->
   <div class="info">
