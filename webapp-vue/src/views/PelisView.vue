@@ -17,12 +17,14 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import { usePeliculasStore } from '@/store/peliculas'
 import BaseContainerMovies from '@/components/BaseContainerMovies.vue'
 import TheHeaderMovies from '@/components/TheHeaderMovies.vue'
-import { useGetData } from '@/composables/getData'
+import { storeToRefs } from 'pinia'
 
-const { peliculas, loading, getDataPelis } = useGetData()
+const usePeliculas = usePeliculasStore()
+const { peliculas, loading } = storeToRefs(usePeliculas)
+const { fetchPeliculas } = usePeliculas
 
 const randomMovies = ref(['star', 'avengers', 'harry', 'batman', 'superman'])
 const randomNumber = Math.floor(Math.random() * randomMovies.value.length)
@@ -34,7 +36,7 @@ const changeBodyBackground = () => {
 }
 
 const fetchMovies = async () => {
-  await getDataPelis(
+  await fetchPeliculas(
     `https://www.omdbapi.com/?s=${randomMovies.value[randomNumber]}&apikey=ab64c929`,
   )
   changeBodyBackground()
@@ -42,7 +44,6 @@ const fetchMovies = async () => {
 
 fetchMovies()
 </script>
-
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 

@@ -13,12 +13,15 @@
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { useGetData } from '@/composables/getData'
+import { usePeliDetailsStore } from '@/store/peliDetails'
 
 import MovieC from '@/components/MovieC.vue'
+import { storeToRefs } from 'pinia'
 
 const route = useRoute()
-const { peli, actors, loading, getDataPeli } = useGetData()
+const usePeliDetails = usePeliDetailsStore()
+const { peli, actors, loading } = storeToRefs(usePeliDetails)
+const { fetchPeliDetails } = usePeliDetails
 
 //cambiar el fondo de la página por la imagen de la película
 const changeBackground = () => {
@@ -32,7 +35,7 @@ const changeBackground = () => {
 }
 
 const fetchMovies = async () => {
-  await getDataPeli(
+  await fetchPeliDetails(
     `https://www.omdbapi.com/?i=${route.params.imdbID}&apikey=ab64c929`,
   )
   changeBackground()
