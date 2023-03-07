@@ -6,6 +6,7 @@ export const usePeliculasStore = defineStore('peliculas', () => {
   const peliculas = ref(null)
   const loading = ref(true)
   const error = ref(null)
+  const ERROR_MESSAGE = 'Error del servidor'
 
   const fetchPeliculas = async url => {
     loading.value = true
@@ -14,7 +15,7 @@ export const usePeliculasStore = defineStore('peliculas', () => {
       peliculas.value = data.Search
     } catch (e) {
       console.log(e)
-      error.value = 'Error del servidor'
+      error.value = ERROR_MESSAGE
     } finally {
       loading.value = false
     }

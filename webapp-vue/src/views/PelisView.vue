@@ -26,7 +26,23 @@ const usePeliculas = usePeliculasStore()
 const { peliculas, loading } = storeToRefs(usePeliculas)
 const { fetchPeliculas } = usePeliculas
 
-const randomMovies = ref(['star', 'avengers', 'harry', 'batman', 'superman'])
+const randomMovies = ref([
+  'star',
+  'avengers',
+  'harry',
+  'batman',
+  'superman',
+  'hulk',
+  'thor',
+  'captain',
+  'wonder',
+  'joker',
+  'deadpool',
+  'black',
+  'fast',
+  'john',
+  'james',
+])
 const randomNumber = Math.floor(Math.random() * randomMovies.value.length)
 
 //cambiar el fondo del body
