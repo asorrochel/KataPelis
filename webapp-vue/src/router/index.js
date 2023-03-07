@@ -18,7 +18,7 @@ const router = createRouter({
       component: PeliView,
     },
     {
-      path: '/:name',
+      path: '/:imdbID/:name',
       name: 'actor',
       component: ActorView,
     },

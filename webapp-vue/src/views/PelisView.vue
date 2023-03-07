@@ -16,14 +16,16 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref } from 'vue'
 
 import BaseContainerMovies from '@/components/BaseContainerMovies.vue'
 import TheHeaderMovies from '@/components/TheHeaderMovies.vue'
+import { useGetData } from '@/composables/getData'
 
-const peliculas = ref([])
-const loading = ref(true)
+const { peliculas, loading, getDataPelis } = useGetData()
+
+const randomMovies = ref(['star', 'avengers', 'harry', 'batman', 'superman'])
+const randomNumber = Math.floor(Math.random() * randomMovies.value.length)
 
 //cambiar el fondo del body
 const changeBodyBackground = () => {
@@ -31,24 +33,14 @@ const changeBodyBackground = () => {
   body.style.backgroundImage = 'none'
 }
 
-const randomMovies = ref(['star', 'avengers', 'harry', 'batman', 'superman'])
-const randomNumber = Math.floor(Math.random() * randomMovies.value.length)
-
-//obtener las peliculas
-const getData = async () => {
-  try {
-    const { data } = await axios.get(
-      `https://www.omdbapi.com/?s=${randomMovies.value[randomNumber]}&apikey=ab64c929`,
-    )
-    peliculas.value = data.Search
-    loading.value = false
-  } catch (error) {
-    return error
-  }
+const fetchMovies = async () => {
+  await getDataPelis(
+    `https://www.omdbapi.com/?s=${randomMovies.value[randomNumber]}&apikey=ab64c929`,
+  )
+  changeBodyBackground()
 }
 
-getData()
-changeBodyBackground()
+fetchMovies()
 </script>
 
 <style>

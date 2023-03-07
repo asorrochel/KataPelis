@@ -12,36 +12,14 @@
 </template>
 
 <script setup>
-import axios from 'axios'
-import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { useGetData } from '@/composables/getData'
 
 import MovieC from '@/components/MovieC.vue'
 
-//Variables
 const route = useRoute()
-const peli = ref(null)
-const actors = ref(null)
+const { peli, actors, loading, getDataPeli } = useGetData()
 
-const loading = ref(true)
-
-//obtener datos de la película
-const getData = async () => {
-  try {
-    const { data } = await axios.get(
-      `https://www.omdbapi.com/?i=${route.params.imdbID}&apikey=ab64c929`,
-    )
-    //guardar los datos de la película
-    peli.value = data
-    //separar los actores por comas y meterlos en un array
-    actors.value = peli.value.Actors.split(', ')
-    loading.value = false
-    changeBackground()
-  } catch (error) {
-    peli.value = null
-    return error
-  }
-}
 //cambiar el fondo de la página por la imagen de la película
 const changeBackground = () => {
   const posterUrl = peli.value.Poster
@@ -52,7 +30,15 @@ const changeBackground = () => {
   body.style.backgroundSize = 'cover'
   body.style.backgroundPosition = 'center center'
 }
-getData()
+
+const fetchMovies = async () => {
+  await getDataPeli(
+    `https://www.omdbapi.com/?i=${route.params.imdbID}&apikey=ab64c929`,
+  )
+  changeBackground()
+}
+
+fetchMovies()
 </script>
 
 <style scoped>

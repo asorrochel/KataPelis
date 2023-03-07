@@ -1,6 +1,10 @@
 <template>
-  <!--replace(/\s+/g, '')-->
-  <router-link :to="{ name: 'actor', params: { name: actor.name } }">
+  <router-link
+    :to="{
+      name: 'actor',
+      params: { name: actor.name },
+    }"
+  >
     <img
       :src="`https://image.tmdb.org/t/p/original${actor.image}`"
       :alt="actor.name"
