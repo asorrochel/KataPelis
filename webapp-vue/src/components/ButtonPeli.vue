@@ -1,10 +1,14 @@
 <template>
-  <div class="set">
+  <div class="set-buttons">
     <a id="trailer" href="#" target="_blank">
       Trailer
       <i class="bi bi-play-fill"></i>
     </a>
-    <a id="imdb" :href="`https://www.imdb.com/title/${peli.imdbID}`" target="_blank">
+    <a
+      id="imdb"
+      :href="`https://www.imdb.com/title/${peli.imdbID}`"
+      target="_blank"
+    >
       IMDB
     </a>
   </div>

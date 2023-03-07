@@ -23,7 +23,7 @@
       {{ peli.Plot }}
     </div>
     <!--Botones-->
-    <div class="set">
+    <div class="set-buttons">
       <ButtonPeli :peli="peli" />
     </div>
     <!--REPARTO-->
@@ -56,7 +56,8 @@ defineProps({
   background-color: transparent;
   background: rgba(0, 0, 0, 0.243);
   border-radius: 8px;
-  width: 70%;
+  padding-left: 10px;
+  width: 90%;
   margin-bottom: 20px;
 
   /* texto transparente para poder mostrar el degradado*/
@@ -66,8 +67,20 @@ defineProps({
   display: inline-block;
   /* para que se muestren en linea */
   margin-right: 64px;
+  color: white;
+  background-color: transparent;
+  background: rgba(0, 0, 0, 0.243);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
 }
 
+.movie-detail .set-buttons {
+  display: inline-block;
+  /* para que se muestren en linea */
+  margin-right: 64px;
+  background: transparent;
+}
 .movie-detail label {
   font-size: 14px;
   color: #ededed;
@@ -80,5 +93,12 @@ defineProps({
 
 .movie-description {
   line-height: 24px;
+  color: white;
+  background-color: transparent;
+  background: rgba(0, 0, 0, 0.243);
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 15px;
+  width: 90%;
 }
 </style>
