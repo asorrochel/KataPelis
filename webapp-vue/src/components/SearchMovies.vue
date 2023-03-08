@@ -5,6 +5,7 @@
       placeholder="Buscar..."
       id="search_input"
       @input="getDataSearch"
+      :value="searchV"
     />
     <!-- Usuario -->
     <img class="user_img" src="/user.jpg" alt="search" />
@@ -17,19 +18,25 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
-
+import { usePaginationStore } from '@/store/PagAndSearch'
 import RouteLinkSearchMovie from '@/components/RouteLinkSearchMovie.vue'
+import { storeToRefs } from 'pinia'
+
+const usePagination = usePaginationStore()
+const { searchV } = storeToRefs(usePagination)
+const { setRouteSearch } = usePagination
 
 const peliculas = ref([])
-
 const getDataSearch = async () => {
   try {
     const pelicula = document.getElementById('search_input').value
-    console.log(pelicula.value)
+    setRouteSearch(pelicula)
     const { data } = await axios.get(
       `https://www.omdbapi.com/?s=${pelicula}&apikey=ab64c929`,
     )
-    peliculas.value = data.Search
+    if (data.Search !== undefined) {
+      peliculas.value = data.Search
+    }
   } catch (error) {
     return error
   }

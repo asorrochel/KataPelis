@@ -25,14 +25,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-
+import { ref, computed, defineProps, watchEffect } from 'vue'
 import RouterLinkMovie from '@/components/RouterLinkMovie.vue'
 import PaginateMovie from '@/components/PaginateMovie.vue'
+import { usePaginationStore } from '@/store/PagAndSearch'
+import { storeToRefs } from 'pinia'
 
-const postXPage = 3
+const usePagination = usePaginationStore()
+const { pageV } = storeToRefs(usePagination)
+const { setRoutePage } = usePagination
+
+const itemsPerPage = 3
 const postInicio = ref(0)
-const postFin = ref(postXPage)
+const postFin = computed(() => postInicio.value + itemsPerPage)
 
 const props = defineProps({
   peliculas: {
@@ -42,16 +47,20 @@ const props = defineProps({
 })
 
 const nextPost = () => {
-  postInicio.value += postXPage
-  postFin.value += postXPage
+  postInicio.value += itemsPerPage
+  setRoutePage(postInicio.value / itemsPerPage)
 }
 
 const prevPost = () => {
-  postInicio.value -= postXPage
-  postFin.value -= postXPage
+  postInicio.value -= itemsPerPage
+  setRoutePage(postInicio.value / itemsPerPage)
 }
 
 const maxLength = computed(() => props.peliculas.length)
+
+watchEffect(() => {
+  postInicio.value = pageV.value * itemsPerPage
+})
 </script>
 
 <style scoped>

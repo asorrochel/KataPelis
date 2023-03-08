@@ -57,7 +57,6 @@ const fetchMovies = async () => {
   )
   changeBodyBackground()
 }
-
 fetchMovies()
 </script>
 <style>
