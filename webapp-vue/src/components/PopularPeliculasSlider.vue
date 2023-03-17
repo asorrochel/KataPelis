@@ -5,12 +5,12 @@
     <i class="bi bi-chevron-right"></i>
     <!-- Cards Películas-->
     <div class="cards">
-      <BaseCardMovie :peliculas="peliculas" />
+      <BaseCardPelicula :peliculas="peliculas" />
     </div>
   </section>
 </template>
 <script setup>
-import BaseCardMovie from '@/components/BaseCardMovie.vue'
+import BaseCardPelicula from '@/components/BaseCardPelicula.vue'
 
 defineProps({
   peliculas: {

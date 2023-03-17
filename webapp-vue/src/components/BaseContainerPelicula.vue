@@ -1,23 +1,23 @@
 <template>
   <section class="movies">
     <h2 class="heading">Películas</h2>
-    <PaginateMovie
+    <PaginatePelicula
       class="mb-2"
-      @next="nextPost"
-      @prev="prevPost"
-      :inicio="postInicio"
-      :fin="postFin"
+      @next="nextPeliPag"
+      @prev="prevPeliPag"
+      :inicio="peliInicio"
+      :fin="peliFin"
       :maxLength="maxLength"
     />
     <!-- Contenedor Cards Películas-->
     <div class="movies-container">
       <div
         class="box"
-        v-for="peli in peliculas.slice(postInicio, postFin)"
+        v-for="peli in peliculas.slice(peliInicio, peliFin)"
         :key="peli.imdbID"
       >
         <div class="box-img">
-          <RouterLinkMovie :peli="peli" />
+          <RouterLinkPelicula :peli="peli" />
         </div>
       </div>
     </div>
@@ -26,8 +26,8 @@
 
 <script setup>
 import { ref, computed, defineProps, watchEffect } from 'vue'
-import RouterLinkMovie from '@/components/RouterLinkMovie.vue'
-import PaginateMovie from '@/components/PaginateMovie.vue'
+import RouterLinkPelicula from '@/components/RouterLinkPelicula.vue'
+import PaginatePelicula from '@/components/PaginatePelicula.vue'
 import { usePaginationStore } from '@/store/PagAndSearch'
 import { storeToRefs } from 'pinia'
 
@@ -35,9 +35,9 @@ const usePagination = usePaginationStore()
 const { pageV } = storeToRefs(usePagination)
 const { setRoutePage } = usePagination
 
-const itemsPerPage = 3
-const postInicio = ref(0)
-const postFin = computed(() => postInicio.value + itemsPerPage)
+const pelisPerPage = 3
+const peliInicio = ref(0)
+const peliFin = computed(() => peliInicio.value + pelisPerPage)
 
 const props = defineProps({
   peliculas: {
@@ -46,20 +46,20 @@ const props = defineProps({
   },
 })
 
-const nextPost = () => {
-  postInicio.value += itemsPerPage
-  setRoutePage(postInicio.value / itemsPerPage)
+const nextPeliPag = () => {
+  peliInicio.value += pelisPerPage
+  setRoutePage(peliInicio.value / pelisPerPage)
 }
 
-const prevPost = () => {
-  postInicio.value -= itemsPerPage
-  setRoutePage(postInicio.value / itemsPerPage)
+const prevPeliPag = () => {
+  peliInicio.value -= pelisPerPage
+  setRoutePage(peliInicio.value / pelisPerPage)
 }
 
 const maxLength = computed(() => props.peliculas.length)
 
 watchEffect(() => {
-  postInicio.value = pageV.value * itemsPerPage
+  peliInicio.value = pageV.value * pelisPerPage
 })
 </script>
 
@@ -94,6 +94,7 @@ watchEffect(() => {
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
 .box {
   width: 300px;
   height: 450px;
@@ -105,7 +106,8 @@ watchEffect(() => {
 .box:hover {
   border-width: 0px;
   transform: scale(1.1) rotateZ(-2deg);
-  box-shadow: -4px 4px 16px #00ffff, 4px -4px 16px #00ff00; /* sombra */
+  box-shadow: -4px 4px 16px #00ffff, 4px -4px 16px #00ff00;
+  /* sombra */
   transition: 0.3s linear;
 }
 

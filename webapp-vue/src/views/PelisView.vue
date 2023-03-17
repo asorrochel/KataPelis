@@ -5,12 +5,12 @@
   <div v-else>
     <!-- Header -->
     <header>
-      <TheHeaderMovies :peliculas="peliculas" />
+      <TheHeaderPeliculas :peliculas="peliculas" />
     </header>
     <!-- Main-->
     <main id="movies">
       <!-- Películas-->
-      <BaseContainerMovies :peliculas="peliculas" />
+      <BaseContainerPelicula :peliculas="peliculas" />
     </main>
   </div>
 </template>
@@ -18,8 +18,8 @@
 <script setup>
 import { ref } from 'vue'
 import { usePeliculasStore } from '@/store/peliculas'
-import BaseContainerMovies from '@/components/BaseContainerMovies.vue'
-import TheHeaderMovies from '@/components/TheHeaderMovies.vue'
+import BaseContainerPelicula from '@/components/BaseContainerPelicula.vue'
+import TheHeaderPeliculas from '@/components/TheHeaderPeliculas.vue'
 import { storeToRefs } from 'pinia'
 
 const usePeliculas = usePeliculasStore()

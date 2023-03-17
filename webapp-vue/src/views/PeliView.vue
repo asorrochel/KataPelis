@@ -5,7 +5,7 @@
   <div v-else>
     <div class="container">
       <!--Película-->
-      <MovieC :peli="peli" :actors="actors" />
+      <BasePelicula :peli="peli" :actors="actors" />
     </div>
     <h1 v-if="peli === null && actors === null">No existe la película</h1>
   </div>
@@ -15,7 +15,7 @@
 import { useRoute } from 'vue-router'
 import { usePeliDetailsStore } from '@/store/peliDetails'
 
-import MovieC from '@/components/MovieC.vue'
+import BasePelicula from '@/components/BasePelicula.vue'
 import { storeToRefs } from 'pinia'
 
 const route = useRoute()

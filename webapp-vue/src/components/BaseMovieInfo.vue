@@ -27,13 +27,13 @@
       <ButtonPeli :peli="peli" />
     </div>
     <!--REPARTO-->
-    <MovieCast :actors="actors" />
+    <PeliculaCast :actors="actors" />
   </div>
 </template>
 
 <script setup>
 import { defineProps } from 'vue'
-import MovieCast from '@/components/BaseMovieCast.vue'
+import PeliculaCast from '@/components/BasePeliculaCast.vue'
 import ButtonPeli from '@/components/ButtonPeli.vue'
 
 defineProps({

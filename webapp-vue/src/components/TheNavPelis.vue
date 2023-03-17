@@ -11,10 +11,10 @@
     </ul>
   </div>
   <!-- Search -->
-  <SearchMovies />
+  <SearchPeliculas />
 </template>
 <script setup>
-import SearchMovies from '@/components/SearchMovies.vue'
+import SearchPeliculas from '@/components/SearchPeliculas.vue'
 </script>
 <style scoped>
 header nav .logo_ul img {

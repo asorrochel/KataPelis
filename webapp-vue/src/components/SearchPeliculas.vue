@@ -11,7 +11,7 @@
     <img class="user_img" src="/user.jpg" alt="search" />
     <!-- Search Items-->
     <div class="search">
-      <RouteLinkSearchMovie :peliculas="peliculas" />
+      <RouterLinkSearchPelicula :peliculas="peliculas" />
     </div>
   </div>
 </template>
@@ -19,7 +19,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { usePaginationStore } from '@/store/PagAndSearch'
-import RouteLinkSearchMovie from '@/components/RouteLinkSearchMovie.vue'
+import RouterLinkSearchPelicula from '@/components/RouterLinkSearchPelicula.vue'
 import { storeToRefs } from 'pinia'
 
 const usePagination = usePaginationStore()

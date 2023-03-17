@@ -5,14 +5,14 @@
     <TheNavPelis />
   </nav>
   <!-- Película Portada-->
-  <PortadaMovie />
+  <BasePortadaPelicula />
   <!-- Películas Populares-->
-  <PopularMoviesSlider :peliculas="peliculas" />
+  <PopularPeliculasSlider :peliculas="peliculas" />
 </template>
 
 <script setup>
-import PortadaMovie from '@/components/PortadaMovie.vue'
-import PopularMoviesSlider from '@/components/PopularMoviesSlider.vue'
+import BasePortadaPelicula from '@/components/BasePortadaPelicula.vue'
+import PopularPeliculasSlider from '@/components/PopularPeliculasSlider.vue'
 import TheNavPelis from '@/components/TheNavPelis.vue'
 
 defineProps({

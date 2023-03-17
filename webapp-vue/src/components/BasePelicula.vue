@@ -5,12 +5,12 @@
   </div>
   <!--Info Película-->
   <div class="info">
-    <MovieInfo :peli="peli" :actors="actors" />
+    <BaseMovieInfo :peli="peli" :actors="actors" />
   </div>
 </template>
 
 <script setup>
-import MovieInfo from '@/components/MovieInfo.vue'
+import BaseMovieInfo from '@/components/BaseMovieInfo.vue'
 defineProps({
   peli: {
     type: Object,

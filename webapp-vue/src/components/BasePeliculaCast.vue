@@ -28,7 +28,7 @@ const getActorData = async actors => {
   const actorR = []
   for (const actor of actors) {
     const { data } = await axios.get(
-      `https://api.themoviedb.org/3/search/person?api_key=77c35a5cc4003ff39a559f7f2aaaf216&query=${actor}`
+      `https://api.themoviedb.org/3/search/person?api_key=77c35a5cc4003ff39a559f7f2aaaf216&query=${actor}`,
     )
     actorR.push(...data.results)
   }
@@ -46,7 +46,6 @@ const fetchActorImages = async () => {
     }
   }
 }
-
 fetchActorImages()
 </script>
 
